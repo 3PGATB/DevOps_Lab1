@@ -1,0 +1,19 @@
+Script started on 2023-06-19 21:19:58-04:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="87" LINES="24"]
+artb@Local-Debian: ~/Documents/DevOps_Lab1/countlines.sh -o artb[27m[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C~/Documents/DevOps_Lab1/countlines.sh -o artb
+Looking for files where the user is: artb
+File: aoeu, Lines: 0 aoeu
+File: asdf, Lines: 0 asdf
+File: dhtns, Lines: 0 dhtns
+File: lab1.sh~, Lines: 85 lab1.sh~
+File: typescript, Lines: 0 typescript
+artb@Local-Debian: ~/Documents/DevOps_Lab1/countlines.sh -m Jun
+Looking for files where the month is: Jun
+File: aoeu, Lines: 0 aoeu
+File: asdf, Lines: 0 asdf
+File: dhtns, Lines: 0 dhtns
+File: lab1.sh~, Lines: 85 lab1.sh~
+File: typescript, Lines: 0 typescript
+artb@Local-Debian:
+exit
+
+Script done on 2023-06-19 21:20:22-04:00 [COMMAND_EXIT_CODE="0"]
