@@ -1,43 +1,63 @@
 #!/usr/bin/env bash
 
+#
+# Author: Art Bugorski
+# E-Mail: arthur.bugorski@3pillarglobal.com
+# Date: 2023-06-19
+#
+
+
+#
+# Variables
+#
+
 feature='' ;
-determined_feature=''; #false
+have_determined_feature=''; #false
 desired_value='root';
-error=''; #false
+error_occurred=''; #false
+
+
+#
+# Parse command line options
+#
 
 while getopts 'm:o:' arg; do
     case $arg in
 	'm')
-	    if [[ $determined_feature ]]; then
-		error=true ;
+	    if [[ $have_determined_feature ]]; then
+		error_occurred=true ;
 	    else		
-		determined_feature=true ;
+		have_determined_feature=true ;
 		feature='month' ;
 		desired_value="$OPTARG" ;
 	    fi	    
 	    ;;
 	'o')
-	    if [[ $determined_feature ]]; then
-		error= true ;
+	    if [[ $have_determined_feature ]]; then
+		error_occurred= true ;
 	    else
-		determined_feature=true ;
+		have_determined_feature=true ;
 		feature='user' ;
 		desired_value="$OPTARG" ;
 	    fi
 	    ;;
 	*)
 	    # unknown flag case
-	    error= true ;
+	    error_occurred= true ;
 	    ;;
     esac
 done
 
 
-if [[ ! $determined_feature ]]; then
-    error=true ;
+#
+# Check for errors, if so, print usages and exit.
+#
+
+if [[ ! $have_determined_feature ]]; then
+    error_occurred=true ;
 fi
 
-if [[ $error ]]; then
+if [[ $error_occurred ]]; then
     >&2 echo "Usage: $0 (-o owner|-m month)"
     exit -1 ;
 else
@@ -47,6 +67,9 @@ else
 fi
 
 
+#
+# Worker functions
+#
 
 function get_user(){
     stat --format='%U' "$1" ;
@@ -61,9 +84,13 @@ function get_linecount(){
 }
 
 
+#
+# Main loop, iterate through files
+#
+
 echo "Looking for files where the $feature is: $desired_value" ;
 value='' ;
-for file in $(ls $(pwd)); do
+for file in $(  ls  $( pwd )  ); do
     if ! [[ -d "$file" ]]; then
 	case $feature in
 	    'user')
@@ -80,5 +107,3 @@ for file in $(ls $(pwd)); do
 	fi
     fi
 done
-
-
